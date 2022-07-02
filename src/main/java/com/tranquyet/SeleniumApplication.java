@@ -9,6 +9,9 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 
+import com.tranquyet.constant.CommonConstant;
+import com.tranquyet.constant.DriverEnum;
+
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class,
 		DataSourceTransactionManagerAutoConfiguration.class, HibernateJpaAutoConfiguration.class })
 public class SeleniumApplication {
@@ -20,7 +23,8 @@ public class SeleniumApplication {
 	}
 
 	public static void check() {
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\DELL 7510\\Downloads\\chromedriver.exe");
+		System.out.println(CommonConstant.NAME_TEST_OUTPUT_FOLDER);
+		System.setProperty(DriverEnum.CHROME.getKey(), DriverEnum.CHROME.getValue());
 		WebDriver driver = new ChromeDriver();
 
 		// Launch Website
@@ -32,6 +36,7 @@ public class SeleniumApplication {
 		// Scroll down the webpage by 5000 pixels
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("scrollBy(0, 5000)");
+		driver.quit();
 
 	}
 
