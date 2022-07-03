@@ -100,6 +100,16 @@ public class TestSetExecution {
 		boolean result = CentralExecution.execute(driver, case_1, builder);
 		Assert.assertTrue(result);
 	}
+	@Test(description = "Case_6: Buy sale product", priority = 5)
+	public void buySaleProduct() throws Exception {
+		TestCaseDTO case_1 = cases.get(5);
+		Assert.assertNotNull(cases);
+		driver = DriverUtils.driverOption(DriverEnum.CHROME);
+		driver.manage().window().minimize();
+		Actions builder = new Actions(driver);
+		boolean result = CentralExecution.execute(driver, case_1, builder);
+		Assert.assertTrue(result);
+	}
 
 	@AfterTest
 	public void endTest() {
