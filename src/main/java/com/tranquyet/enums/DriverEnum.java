@@ -1,4 +1,4 @@
-package com.tranquyet.constant;
+package com.tranquyet.enums;
 
 import java.util.Arrays;
 
@@ -7,8 +7,7 @@ import lombok.Getter;
 @Getter
 public enum DriverEnum {
 	CHROME("webdriver.chrome.driver", "C:\\Users\\DELL 7510\\Downloads\\chromedriver.exe"), 
-	EDGE(null, null),
-	FIREFOX(null, null);
+	EDGE("", "");
 
 	private String key;
 	private String value;
@@ -17,8 +16,11 @@ public enum DriverEnum {
 		this.key = key;
 		this.value = value;
 	}
-
+	
 	public static DriverEnum fromKey(String key) {
 		return Arrays.stream(values()).filter(p -> p.key.equalsIgnoreCase(key)).findFirst().get();
+	}
+	public static DriverEnum fromValue(String value) {
+		return Arrays.stream(values()).filter(p -> p.value.equalsIgnoreCase(value)).findFirst().get();
 	}
 }
