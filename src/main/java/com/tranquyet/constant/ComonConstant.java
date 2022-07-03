@@ -16,4 +16,6 @@ public class ComonConstant {
 	public static final Integer TIMEOUT=3000;
 	
 	public static final String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+	public static final String URL_EMAIL = "https://mail.google.com/mail/u/0/#inbox";
 }

@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import com.tranquyet.constant.ComonConstant;
 import com.tranquyet.dto.TestCaseDTO;
 import com.tranquyet.enums.ActionEnum;
+import com.tranquyet.utils.DriverUtils;
 
 @Configuration
 public class CentralExecution {
@@ -86,5 +87,12 @@ public class CentralExecution {
 			}
 		});
 		return result;
+	}
+
+	public static boolean checkEmail(Integer numbSt, WebDriver driver) {
+		DriverUtils.createNewTab(numbSt + 1, driver);
+		driver.get(ComonConstant.URL_EMAIL);
+		// TODO: check email, website didn't send email
+		return true;
 	}
 }
