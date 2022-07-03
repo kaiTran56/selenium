@@ -1,11 +1,12 @@
 package com.tranquyet.execution;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -36,41 +37,48 @@ public class TestSetExecution {
 
 	}
 
-	@Test(description = "Case_1: check faild to create new account")
+	/**
+	 * 
+	 */
+	@Test(description = "Case_1: check faild to create new account", priority = 1)
 	public void faildCreateAccount() {
 		TestCaseDTO case_1 = cases.get(0);
 		Assert.assertNotNull(cases);
 		try {
 			driver = DriverUtils.driverOption(DriverEnum.CHROME);
-			driver.get(case_1.getSteps().get(0).getData());
-			WebElement signIn = driver.findElement(By.xpath(case_1.getSteps().get(1).getLocator()));
-			signIn.click();
-			Assert.assertTrue(true);
+			driver.manage().window().minimize();
+			Actions builder = new Actions(driver);
+			boolean result = CentralExecution.execute(driver, case_1, builder);
+			Assert.assertTrue(result);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	@Test
-	public void check_1() {
-		Assert.assertTrue(1 == 1);
-	}
-
-	@Test
-	public void check_2() {
-		Assert.assertTrue(true);
-	}
-
-	@Test
-	public void check_3() {
-		Assert.assertTrue(1 == 1);
+	@Test(description = "Case_2: Create new account successfully", priority = 2)
+	public void createNewAccountSuccess() {
+		TestCaseDTO case_1 = cases.get(1);
+		Assert.assertNotNull(cases);
+		((JavascriptExecutor) driver).executeScript("window.open()");
+		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+		driver.switchTo().window(tabs.get(1));
+		try {
+//			driver = DriverUtils.driverOption(DriverEnum.CHROME);
+//			driver.manage().window().minimize();
+			Actions builder = new Actions(driver);
+			boolean result = CentralExecution.execute(driver, case_1, builder);
+			Assert.assertTrue(result);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@AfterTest
 	public void endTest() {
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(15000);
 			driver.quit();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block

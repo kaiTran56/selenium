@@ -18,6 +18,6 @@ public enum ActionEnum {
 
 	public static ActionEnum fromKey(String key) {
 		return Arrays.stream(values())
-				.filter(p -> p.key.equalsIgnoreCase(key)).findFirst().get();
+				.filter(p -> p.key.equalsIgnoreCase(key.trim())).findFirst().get();
 	}
 }

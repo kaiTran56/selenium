@@ -32,6 +32,7 @@ public class ExcelHelper {
 		try {
 			FileInputStream excelFile = new FileInputStream(new File(path));
 
+			@SuppressWarnings("resource")
 			Workbook workbook = new XSSFWorkbook(excelFile);
 			Sheet datatypeSheet = workbook.getSheetAt(0);
 			Integer maxRows = datatypeSheet.getPhysicalNumberOfRows();

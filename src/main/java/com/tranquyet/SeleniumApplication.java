@@ -15,8 +15,8 @@ public class SeleniumApplication {
 
 	@Autowired
 	private ExecutionService exService;
-	
-	void test(){
+
+	void test() {
 		System.out.println(exService.getAll());
 		;
 	}
@@ -24,8 +24,6 @@ public class SeleniumApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(SeleniumApplication.class, args);
-//		check();
-		ExecutionService.source();
 	}
 
 }
