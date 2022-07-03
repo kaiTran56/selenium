@@ -57,6 +57,12 @@ public class CentralExecution {
 				break;
 			}
 			case NAVIGATE -> {
+				try {
+					Thread.sleep(ComonConstant.TIMEOUT);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				driver.get(p.getData());
 				break;
 			}

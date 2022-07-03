@@ -24,14 +24,19 @@ public class TestSetExecution {
 
 	private static WebDriver driver = null;
 
+//	@Parameters("driverType")
 	@BeforeTest
-	public void initialize() {
-
+	public void initialize() throws Exception {
 		String path = ComonConstant.DIR_PARRENT + ComonConstant.NAME_TEST_OUTPUT_FOLDER;
 		if (IOUtils.isExist(path)) {
 			IOUtils.deleteFile(path);
 		}
 		cases = ExecutionService.source();
+//		if (driverType.equalsIgnoreCase("chrome")) {
+
+//		} else if (driverType.equalsIgnoreCase("edge")) {
+//			driver = DriverUtils.driverOption(DriverEnum.EDGE);
+//		}
 
 	}
 
@@ -41,10 +46,10 @@ public class TestSetExecution {
 	 */
 	@Test(description = "Case_1: check faild to create new account", priority = 1)
 	public void faildCreateAccount() throws Exception {
+		driver = DriverUtils.driverOption(DriverEnum.CHROME);
 		TestCaseDTO case_1 = cases.get(0);
 		Assert.assertNotNull(cases);
-		driver = DriverUtils.driverOption(DriverEnum.CHROME);
-		driver.manage().window().minimize();
+
 		Actions builder = new Actions(driver);
 		boolean result = CentralExecution.execute(driver, case_1, builder);
 		Assert.assertTrue(result);
@@ -91,7 +96,7 @@ public class TestSetExecution {
 	}
 
 	@Test(description = "Case_5: check search function", priority = 4)
-	public void checkPlaceholderSearchArea() throws Exception {
+	public void checkSearchFunction() throws Exception {
 		Integer numbSt = 5;
 		TestCaseDTO case_1 = cases.get(4);
 		Assert.assertNotNull(cases);
@@ -100,14 +105,19 @@ public class TestSetExecution {
 		boolean result = CentralExecution.execute(driver, case_1, builder);
 		Assert.assertTrue(result);
 	}
-	@Test(description = "Case_6: Buy sale product", priority = 5)
+
+	@Test(description = "Case_6: Buy sale product")
 	public void buySaleProduct() throws Exception {
+		WebDriver driverEdge = DriverUtils.driverOption(DriverEnum.EDGE);
+		driverEdge.manage().window().minimize();
+
+//		Integer numbSt = 7;
 		TestCaseDTO case_1 = cases.get(5);
 		Assert.assertNotNull(cases);
-		driver = DriverUtils.driverOption(DriverEnum.CHROME);
-		driver.manage().window().minimize();
-		Actions builder = new Actions(driver);
-		boolean result = CentralExecution.execute(driver, case_1, builder);
+//		DriverUtils.createNewTab(numbSt, driver);
+
+		Actions builder = new Actions(driverEdge);
+		boolean result = CentralExecution.execute(driverEdge, case_1, builder);
 		Assert.assertTrue(result);
 	}
 
